@@ -1,6 +1,6 @@
 # Manage-Your-Task-React-JS
 
-This is a simple To-Do List web application built using React. It allows users to add tasks, mark tasks as completed, and move completed tasks back to the pending list. The application utilizes Formik for form handling and Yup for form validation.
+This is a simple To-Do List web application built using React Redux. It allows users to add tasks, mark tasks as completed, and move completed tasks back to the pending list. The application utilizes Formik for form handling and Yup for form validation.
 
 ## Getting Started
 
