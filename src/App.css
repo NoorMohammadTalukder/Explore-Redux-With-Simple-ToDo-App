@@ -1,0 +1,146 @@
+* {
+  color: #497174;
+}
+h2 {
+  font-size: 32px;
+}
+p {
+  font-size: 24px;
+}
+.container {
+  max-width: 1280px;
+  margin: auto;
+}
+.pt1 {
+  margin-top: 24px;
+  border-radius: 12px;
+  padding: 20px 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.input {
+  color: #497174;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Tektur", cursive;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+
+  outline: none;
+}
+input:focus {
+  border: 2px solid rgba(15, 207, 9, 0.671);
+}
+.formInputDescription:focus {
+  border: 2px solid rgba(15, 207, 9, 0.671);
+}
+.formInputText {
+  height: 30px;
+  margin-bottom: 10px;
+}
+.formInputDescription {
+  height: 100px;
+}
+.errorMessage {
+  color: #eb6440;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+}
+.btnAdd:hover {
+  background-color: #497174;
+  color: #eff5f5;
+  transition: 0.2s ease-in;
+}
+.btnRemove:hover {
+  background-color: #eb6440;
+  color: #fff;
+  transition: 0.2s ease-in;
+}
+.btnComplete:hover{
+  background-color: rgba(15, 207, 9, 0.671);
+  color: #fff;
+  transition: 0.2s ease-in;
+}
+.btnPending:hover{
+  background-color: #f2be22;
+  color: #fff;
+  transition: 0.2s ease-in;
+}
+button {
+  border: none;
+  color: #497174;
+  border: 1px solid #497174;
+  width: 200px;
+  font-family: "Tektur", cursive;
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 12px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.pt2 {
+  display: flex;
+}
+.tasks {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 10px;
+  border-radius: 2px;
+}
+.task {
+  margin-top: 24px;
+  padding: 20px 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.pending{
+  width: 40px;
+  padding: 4px;
+  text-align: center;
+  font-size: 10px;
+  color: #eff5f5;
+  background: #f2be22;
+}
+.complete{
+  width: 50px;
+  padding: 4px;
+  text-align: center;
+  font-size: 10px;
+  color: #eff5f5;
+  background: rgba(15, 207, 9, 0.671);;
+}
+.noItems {
+  text-align: center;
+  color: #eb6440;
+  margin-top: 24px;
+
+}
+@media only screen and (max-width: 688px) {
+  .container {
+    max-width: 350px;
+    margin: auto;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  p {
+    font-size: 12px;
+  }
+  .tasks {
+    width: 49%;
+  }
+  button {
+    width: auto;
+    font-size: 12px;
+    padding: 12px;
+    border-radius: 4px;
+    margin-top: 12px;
+    cursor: pointer;
+    margin-right: 4px;
+  }
+}
