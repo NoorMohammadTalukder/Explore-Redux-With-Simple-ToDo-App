@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import './App.css';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
+import "./App.css";
 
 import {
   addTask,
@@ -10,7 +10,7 @@ import {
   completeTask,
   undoCompleteTask,
   removeCompletedTask,
-} from './actions/taskActions';
+} from "./actions/taskActions";
 // import { removeCompletedTask } from './actions/taskActions'; // Import the action
 
 function App() {
@@ -20,18 +20,29 @@ function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const initialValues = {
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     completed: false,
-    status: 'pending',
+    status: "pending",
   };
   const removeCompleted = (index) => {
     dispatch(removeCompletedTask(index)); // Dispatch the removeCompletedTask action with the index of the task
   };
 
+  const [checkboxStates, setCheckboxStates] = useState(
+    new Array(list.length).fill(false)
+  );
+
+  const handleTaskCompletion = (index) => {
+    const completedTask = list[index];
+    dispatch(completeTask(index, completedTask));
+    const newCheckboxStates = [...checkboxStates];
+    newCheckboxStates[index] = true;
+    setCheckboxStates(newCheckboxStates);
+  };
   const validationSchema = Yup.object({
-    title: Yup.string().required('Title is required'),
-    description: Yup.string().required('Description is required'),
+    title: Yup.string().required("Title is required"),
+    description: Yup.string().required("Description is required"),
   });
 
   const onSubmit = (values, { resetForm }) => {
@@ -63,8 +74,8 @@ function App() {
 
   return (
     <>
-      <div className='container'>
-        <div className='pt1'>
+      <div className="container">
+        <div className="pt1">
           <h1>To Do</h1>
           <div>
             <Formik
@@ -75,39 +86,39 @@ function App() {
                 resetForm();
               }}
             >
-              <Form className='form'>
+              <Form className="form">
                 <>
-                  <div className='formControl'>
+                  <div className="formControl">
                     <p>Title</p>
                     <Field
-                      type='text'
-                      name='title'
-                      className='formInputText input'
+                      type="text"
+                      name="title"
+                      className="formInputText input"
                     />
                     <ErrorMessage
-                      name='title'
-                      component='div'
-                      className='errorMessage'
+                      name="title"
+                      component="div"
+                      className="errorMessage"
                     />
                   </div>
 
-                  <div className='formControl'>
+                  <div className="formControl">
                     <p>Description</p>
                     <Field
-                      type='text'
-                      name='description'
-                      className='formInputDescription input'
-                      as='textarea'
+                      type="text"
+                      name="description"
+                      className="formInputDescription input"
+                      as="textarea"
                     />
                     <ErrorMessage
-                      name='description'
-                      component='div'
-                      className='errorMessage'
+                      name="description"
+                      component="div"
+                      className="errorMessage"
                     />
                   </div>
 
-                  <div className='btn'>
-                    <button type='submit' className='btnAdd'>
+                  <div className="btn">
+                    <button type="submit" className="btnAdd">
                       Add Task
                     </button>
                   </div>
@@ -117,11 +128,11 @@ function App() {
           </div>
         </div>
 
-        <div className='pt2'>
-          <div className='tasks'>
+        <div className="pt2">
+          <div className="tasks">
             {list.length !== 0 ? (
               list.map((item, index) => (
-                <div key={index} className='task'>
+                <div key={index} className="task">
                   <p>
                     <b>Title: </b>
                     {item.title}
@@ -129,67 +140,68 @@ function App() {
                   <p>
                     <b>Description:</b> {item.description}
                   </p>
-                  <p className='pending'>Pending</p>
-                  <div className='btn'>
+                  <p className="pending">Pending</p>
+                  <div className="btn">
                     <button
-                      className='btnRemove'
+                      className="btnRemove"
                       onClick={() => {
                         remove(index);
                       }}
                     >
                       Remove
                     </button>
+                    <input
+                      type="checkbox"
+                      className="checkbox"
+                      // onChange={() => {
+                      //   handleTaskCompletion(index);
+                      // }}
+                     
+                    />
+                    <p><small>Mark as completed</small></p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="noItems">No items in the doing list.</p>
+            )}
+          </div>
+          {/* <div className="tasks">
+            {completedList.length !== 0 ? (
+              completedList.map((item, index) => (
+                <div key={index} className="task">
+                  <p>
+                    <b>Title: </b>
+                    {item.title}
+                  </p>
+                  <p>
+                    <b>Description:</b> {item.description}
+                  </p>
+                  <p className="complete">Complete</p>
+                  <div className="btn">
                     <button
-                      className='btnComplete'
+                      className="btnRemove"
                       onClick={() => {
-                        completeTask2(index);
+                        removeCompleted(index); // Call the removeCompleted function with the index of the task
                       }}
                     >
-                      Complete
+                      Remove
+                    </button>
+                    <button
+                      className="btnPending"
+                      onClick={() => {
+                        task(index);
+                      }}
+                    >
+                      Pending
                     </button>
                   </div>
                 </div>
               ))
             ) : (
-              <p className='noItems'>No items in the doing list.</p>
+              <p className="noItems">No items in the completed list.</p>
             )}
-          </div>
-          <div className='tasks'>
-    {completedList.length !== 0 ? (
-      completedList.map((item, index) => (
-        <div key={index} className='task'>
-          <p>
-            <b>Title: </b>
-            {item.title}
-          </p>
-          <p>
-            <b>Description:</b> {item.description}
-          </p>
-          <p className='complete'>Complete</p>
-          <div className='btn'>
-            <button
-              className='btnRemove'
-              onClick={() => {
-                removeCompleted(index); // Call the removeCompleted function with the index of the task
-              }}
-            >
-              Remove 
-            </button>
-            <button
-              className='btnPending'
-              onClick={() => {
-                task(index);
-              }}
-            >
-              Pending
-            </button>
-          </div>
-        </div>
-      ))
-    ) : (
-      <p className='noItems'>No items in the completed list.</p>
-    )}
-  </div>
+          </div> */}
         </div>
       </div>
     </>

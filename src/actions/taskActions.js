@@ -14,10 +14,10 @@ export const addTask = (task) => {
     };
   };
   
-  export const completeTask = (index) => {
+  export const completeTask = (index, task) => {
     return {
       type: 'COMPLETE_TASK',
-      payload: index,
+      payload: { index, task }, // Pass both the index and completed task as payload
     };
   };
   
